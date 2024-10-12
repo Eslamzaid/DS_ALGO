@@ -6,3 +6,35 @@ big_test = [48, 22, 93, 17, 90, 42, 38, 32, 77, 40, 67, 69, 85, 71, 57, 60, 64, 
       11, 16, 46, 57, 22, 48, 39, 85, 77, 23, 92, 95, 97, 87, 47, 92, 17, 94, 
       15, 76, 30, 72, 28, 95]
 test_small = [15, 76, 30, 72, 28, 95]
+
+def swap(arr, ind1, ind2):
+    temp = arr[ind1]
+    arr[ind1] = arr[ind2]
+    arr[ind2] = temp
+    
+def pivot(arr, pivot_index, end_index):
+    swap_index = pivot_index
+    
+    for i in range(pivot_index+1, end_index+1):
+        if arr[i] < arr[pivot_index]:
+            swap_index += 1
+            swap(arr, swap_index, i)
+    
+    swap(arr, pivot_index, swap_index)
+    return swap_index
+
+
+testing = [4, 6, 1, 7, 3, 2, 5]
+
+def __r_quick_sort(my_list, left, right):
+    if left < right:
+        pivot_index = pivot(my_list, left, right)  
+        __r_quick_sort(my_list, left, pivot_index-1)
+        __r_quick_sort(my_list, pivot_index+1, right)
+    return my_list
+
+def quick_sort(the_list):
+    return __r_quick_sort(the_list, 0, len(the_list)-1)    
+
+
+print(quick_sort(big_test))
